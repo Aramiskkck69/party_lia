@@ -1,3 +1,4 @@
+<?php  session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +15,6 @@
     <!-- Fond   -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
-
 </head>
 <body>
 <header>
@@ -60,21 +60,13 @@
             <div class="col">
                 <form>
                     <div id="AddControll">
+                        <?php
 
+                        include_once 'php/login.php';
+
+                        ?>
 
                     </div>
-<!--                    <div class="form-group">-->
-<!--                        <label for="name">Nombre</label>-->
-<!--                        <input type="text" class="form-control" id="name" placeholder="Nombre">-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <label for="last_name"> Apellido </label>-->
-<!--                        <input type="text" class="form-control" id="last_name" placeholder="Apellido">-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <label for="email"> Email </label>-->
-<!--                        <input type="email" class="form-control" id="email" placeholder="user@correo.com">-->
-<!--                    </div>-->
 
                 </form>
             </div>
@@ -121,6 +113,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="js/bootstrap/bootstrap.min.js" ></script>
-<script src="js/principal/main.js" type="text/javascript"></script>
+<!--<script src="js/principal/main.js" type="text/javascript"></script>-->
 </body>
 </html>
