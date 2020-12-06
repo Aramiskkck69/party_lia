@@ -1,6 +1,6 @@
 <?php
 //Conexion a la base de datos
-$conexion = mysqli_connect("localhost", 'root',"","party");
+ $conexion = mysqli_connect("localhost", 'root',"","party");
 
 
 // query para codificar caracteres

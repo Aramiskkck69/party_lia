@@ -1,4 +1,9 @@
-<?php  session_start(); ?>
+<?php
+
+require "php/conexion_bd.php";
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +17,7 @@
     <script src="js/bootstrap/smooth-scroll.polyfills.min.js"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
+
     <!-- Fond   -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
@@ -96,37 +102,62 @@
             </div>
         </div>
     </div>
-</footer>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Launch demo modal
-</button>
 
+
+</footer>
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                ...
+            <div class="modal-body" style="display: block">
+                <input type="text" hidden id="id_edit" name="id">
+                <label>Nombre</label>
+                <input type="text" name="" id="nombre" class="form-control input-sm">
+                <label>Apellidos</label>
+                <input type="text" name="" id="apellido" class="form-control input-sm">
+                <label>Emial</label>
+                <input type="email" name="" id="email" class="form-control input-sm">
+                <label> Celular</label>
+                <input type="text" name="" id="celular" class="form-control input-sm" >
             </div>
+
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-warning text-white" data-dismiss="modal">Actualizar</button>
             </div>
         </div>
     </div>
 </div>
+
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="js/bootstrap/bootstrap.min.js" ></script>
 <!--<script src="js/principal/main.js" type="text/javascript"></script>-->
+<script type="text/javascript">
+    function agregarFarmActualizar(idInv){
+        $.ajax({
+           type: 'POST',
+           data: "idInv="+ idInv,
+            utl: "php/obtenerDatos.php",
+            success:function (r){
+               datos=jQuery.parseJSON(r);
+               $('#id_edit').val(datos['id']);
+               $('#nombre').val(datos['nombre']);
+               $('#apellido').val(datos['apellido']);
+               $('#email').val(datos['telefono_inv']);
+            }
+
+        });
+    }
+</script>
+
+
 </body>
 </html>
