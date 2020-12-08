@@ -1,10 +1,21 @@
 <?php
-//Conexion a la base de datos
- $conexion = mysqli_connect("localhost", 'root',"","party");
+class conectar{
+
+    public function conexion(){
+         $conexion = mysqli_connect("localhost", 'root',"","party");
+
+     return $conexion;
+    }
 
 
-// query para codificar caracteres
 
-mysqli_query($conexion,"SET NAMES 'utf8'");
+}
+$obj = new conectar();
+
+
+
+
+
+
 
 

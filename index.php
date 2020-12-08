@@ -17,7 +17,9 @@ session_start();
     <script src="js/bootstrap/smooth-scroll.polyfills.min.js"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
-
+    <!--    data table-->
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <!-- Fond   -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
@@ -136,26 +138,38 @@ session_start();
 
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="js/bootstrap/bootstrap.min.js" ></script>
+<script type="text/javascript" src="js/main.js"></script>
 <!--<script src="js/principal/main.js" type="text/javascript"></script>-->
-<script type="text/javascript">
-    function agregarFarmActualizar(idInv){
-        $.ajax({
-           type: 'POST',
-           data: "idInv="+ idInv,
-            utl: "php/obtenerDatos.php",
-            success:function (r){
-               datos=jQuery.parseJSON(r);
-               $('#id_edit').val(datos['id']);
-               $('#nombre').val(datos['nombre']);
-               $('#apellido').val(datos['apellido']);
-               $('#email').val(datos['telefono_inv']);
-            }
 
-        });
-    }
+
+<script type="text/javascript">
+        function agregarFarmActualizar(idInv){
+            //console.log(idInv);
+            $.ajax({
+               type: "POST",
+               data: "idInv=" + idInv,
+                url: "php/obtenerDatos.php",
+                success:function(r){
+                    r=r.substring(1);
+                    // console.log(typeof (r));
+                    // console.log(r);
+                    datos = jQuery.parseJSON(r);
+                    console.log(datos);
+                   $('#id_edit').val(datos[0]);
+                   $('#nombre').val(datos['nombre']);
+                   $('#apellido').val(datos['apellido']);
+                   $('#email').val(datos['email']);
+                   $('#celular').val(datos['telefono_inv']);
+                },
+                error:function(eror){
+                   //console.log(eror);
+                }
+            });
+
+        }
 </script>
 
 
