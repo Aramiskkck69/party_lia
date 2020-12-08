@@ -1,6 +1,9 @@
 <?php
-$cell = $_SESSION['usuario_tel'] ;
+
 require_once 'conexion_bd.php';
+session_start();
+$cell = $_SESSION['usuario_tel'] ;
+
 
 $obj = new conectar();
 $conexion = $obj->conexion();
@@ -19,7 +22,7 @@ $query1 = mysqli_query($conexion, $invitados);
 
 if(mysqli_num_rows($query1) == $NoInv){?>
 
-<table class='table  table-striped table-dark' id="tabla_inv">
+<table class='table table-dark ' id="tabla_inv">
     <tr >
         <th scope='col'> Nombre </th><th scope='col'> Apellido </th>
         <th scope='col'> Email </th>
@@ -71,7 +74,8 @@ if(mysqli_num_rows($query1) == $NoInv){?>
 
 <?php }else{ ?>
 
-<table class='table  table-striped table-dark'>
+<form class="form-control" action="php/saveDatos.php" method="post">
+    <table class='table  ' id="saveDatos" >
        <tr >
        <th scope='col'> No. Invitados </th>
        <th scope='col'> Nombre </th><th scope='col'> Apellido </th>
@@ -81,29 +85,32 @@ if(mysqli_num_rows($query1) == $NoInv){?>
 
 <?php for ($i=1;$i <= $NoInv; $i++){?>
     <tr>
-                <td><?php echo $i ?> </td>
+                <td> <?php echo $i ?>
+                <input name="id" value="<?php echo $i ?>" hidden/>
+                </td>
                 <td>
-                <input type='text' id='txtFName' placeholder='Nombre' autofocus />
+                <input type='text' name="nombre" placeholder='Nombre' autofocus />
                 </td>
 
                 <td>
-                <input name="apellido" type='text' id='txtLName' placeholder='Apellido' />
+                <input type='text' name="apellido"    placeholder='Apellido' />
                 </td>
 
                 <td>
-                <input name="email" type='email' id='txtemail' placeholder='usuario@email.com' />
+                <input  type='email' name="email" placeholder='usuario@email.com' />
                 </td>
 
                 <td>
-                <input name="numero" type='text' id='txtnumber'  pattern= '[0-9]{10}'  placeholder='(lada) + numero' />
+                <input  type='text' name="numero"   placeholder='(lada) + numero' />
                 </td>
 
     </tr>
     <?php }?>
 </table>
     <div>
-        <div >
-            <button ><a href="php/save.php"> guardar </a></button>
+        <div>
+            <button type="submit"> guardar </button>
         </div>
     </div>
+</form>
 <?php }?>

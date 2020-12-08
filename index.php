@@ -1,7 +1,7 @@
 <?php
 
 require "php/conexion_bd.php";
-session_start();
+
 
 ?>
 <!DOCTYPE html>
@@ -9,22 +9,26 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>invitacion</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!--    <link rel="stylesheet" type="text/css" href="librerias/datatable/bootstrap.css">-->
+    <link rel="stylesheet" type="text/css" href="librerias/datatable/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="librerias/alertify/css/alertify.css">
+    <link rel="stylesheet" type="text/css" href="librerias/alertify/css/themes/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="librerias/fontawesome/css/font-awesome.css">
+
+    <script src="librerias/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="librerias/datatable/jquery.dataTables.min.js"></script>
+    <script src="librerias/datatable/dataTables.bootstrap4.min.js"></script>
+    <script src="librerias/alertify/alertify.js"></script>
+
     <!-- Estilos CSS -->
     <link rel="stylesheet" type="text/css" href="css/styles/principal/styles.css" />
-    <!-- Bootstrap -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Scroll   -->
-    <script src="js/bootstrap/smooth-scroll.polyfills.min.js"></script>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!--    data table-->
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
-    <script type="text/javascript" src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+
     <!-- Fond   -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
-    <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 </head>
 <body>
 <header>
@@ -61,13 +65,16 @@ session_start();
     <div class="container">
         <div class="row">
             <div class="col">
-                <form method="POST" ">
+
                     <div id="AddControll">
                         <?php
+
                             include 'php/registro.php';
+                            $cell = $_SESSION['usuario_tel'] ;
+
                         ?>
                     </div>
-                 </form>
+
         </div>
     </div>
 </section>
@@ -94,7 +101,7 @@ session_start();
 <!--mapa -->
     <div id="map-container-google-11" class="z-depth-1-half map-container-6" style="height: 400px">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57654.32138048381!2d-100.98195314648616!3d25.425051647490754!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86880d9078df19ef%3A0xa9519241794730c0!2sSaltillo%2C%20Coah.!5e0!3m2!1ses-419!2smx!4v1605560902344!5m2!1ses-419!2smx" frameborder="0"
-                style="border:0" allowfullscreen></iframe>
+            style="border:0" allowfullscreen></iframe>
     </div>
 </section>
 <footer class="text-center footer-style">
@@ -119,7 +126,7 @@ session_start();
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="modalActualizar">
+            <form id="modalActualizar" >
             <div class="modal-body" style="display: block" >
                 <input type="text"  id="id_edit" name="id_edit" class="form-control input-sm" hidden>
                 <label>Nombre</label>
@@ -139,18 +146,19 @@ session_start();
         </div>
     </div>
 </div>
+<!--<div id="r">-->
+<!--<strong> Hola</strong>-->
+
+</div>
 
 
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-<script src="js/bootstrap/bootstrap.min.js" ></script>
 <script type="text/javascript" src="js/principal/main.js"></script>
 <!--<script src="js/principal/main.js" type="text/javascript"></script>-->
 
 
 <script type="text/javascript">
         function agregarFarmActualizar(idInv){
+
             //console.log(idInv);
             $.ajax({
                type: "POST",
@@ -179,24 +187,20 @@ session_start();
 <script type="text/javascript">
     $(document).ready(function () {
 
-        $('#btnActualiza').click(function () {
+        $('#btnActualiza').click(function (e) {
+            e.preventDefault();
             datos = $('#modalActualizar').serialize();
-            console.log(datos);
+           // console.log(datos);
 
             $.ajax({
                 type: "POST",
                 data: datos,
                 url: "php/actualizarDatos.php",
                 success: function (r) {
-                    //window.open("http://localhost:63342/Invitations/php/actualizarDatos.php", '_blank');
-                    if (r == 1) {
-                        $('#tabla_inv').load('php/registro.php');
-                        console.log("nose");
-                        // alertify.success("Invitado Actualizado");
-                    } else {
-                        console.log("d");
-                        // alertify.error("Fallo en Actualizar")
-                    }
+                   console.log(r);
+                    $('#tabla_inv').load('php/registro.php');
+                },error: function() {
+                    console.log("Signup was unsuccessful");
                 }
 
 
