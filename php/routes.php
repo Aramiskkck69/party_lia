@@ -1,11 +1,12 @@
 <?php
-require 'conexion_bd.php';
+
 session_start();
 
 if(isset($_POST)){
     $name = trim($_POST["userName"]);
     $cell = trim($_POST["userCell"]);
 }
+$conexion = mysqli_connect("localhost", 'root',"","party");
 
 
 

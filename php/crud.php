@@ -1,19 +1,19 @@
 <?php
 
 class crud{
-    public function agregar($datos){
-        $obj = new conectar();
-        $conexion = $obj->conexion();
-
-        $sql = "INSERT INTO invitados (id,nombre,apellido,email,telefono_inv) values 
-                ('$datos[0]',
-                '$datos[1]',
-                '$datos[2]',
-                '$datos[3]',
-                '$datos[4]')";
-
-    return mysqli_query($conexion,$sql);
-}
+//    public function agregar($datos){
+//        $obj = new conectar();
+//        $conexion = $obj->conexion();
+//
+//        $sql = "INSERT INTO invitados (id,nombre,apellido,email,telefono_inv) values
+//                ('$datos[0]',
+//                '$datos[1]',
+//                '$datos[2]',
+//                '$datos[3]',
+//                '$datos[4]')";
+//
+//    return mysqli_query($conexion,$sql);
+//}
     public function obtenDatos($idInv){
 
         $obj = new conectar();
@@ -33,7 +33,20 @@ class crud{
 
         return $datos;
     }
+    public function actualizar($datos){
+        $obj = new conectar();
+        $conexion = $obj->conexion();
 
+
+        $sql = "UPDATE invitados SET nombre ='$datos[0]' ,
+                     apellido='$datos[1]',
+                     email='$datos[2]',
+                     telefono_inv ='$datos[3]' 
+                 WHERE id= '$datos[4]'";
+
+        return mysqli_query($conexion,$sql);
+
+    }
 }
 
 

@@ -23,6 +23,8 @@ session_start();
     <!-- Fond   -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 </head>
 <body>
 <header>
@@ -117,21 +119,23 @@ session_start();
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body" style="display: block">
-                <input type="text" hidden id="id_edit" name="id">
+            <form id="modalActualizar">
+            <div class="modal-body" style="display: block" >
+                <input type="text"  id="id_edit" name="id_edit" class="form-control input-sm" hidden>
                 <label>Nombre</label>
-                <input type="text" name="" id="nombre" class="form-control input-sm">
+                <input type="text" name="nombre" id="nombre" class="form-control input-sm">
                 <label>Apellidos</label>
-                <input type="text" name="" id="apellido" class="form-control input-sm">
+                <input type="text" name="apellido" id="apellido" class="form-control input-sm">
                 <label>Emial</label>
-                <input type="email" name="" id="email" class="form-control input-sm">
+                <input type="email" name="email" id="email" class="form-control input-sm">
                 <label> Celular</label>
-                <input type="text" name="" id="celular" class="form-control input-sm" >
+                <input type="text" name="celular" id="celular" class="form-control input-sm" >
             </div>
-
             <div class="modal-footer">
-                <button type="button" class="btn btn-warning text-white" data-dismiss="modal">Actualizar</button>
+                <button type="button" class="btn btn-warning text-white" data-dismiss="modal" id="btnActualiza">Actualizar</button>
             </div>
+            </form>
+
         </div>
     </div>
 </div>
@@ -141,7 +145,7 @@ session_start();
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="js/bootstrap/bootstrap.min.js" ></script>
-<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/principal/main.js"></script>
 <!--<script src="js/principal/main.js" type="text/javascript"></script>-->
 
 
@@ -158,7 +162,7 @@ session_start();
                     // console.log(r);
                     datos = jQuery.parseJSON(r);
                     console.log(datos);
-                   $('#id_edit').val(datos[0]);
+                   $('#id_edit').val(datos['id']);
                    $('#nombre').val(datos['nombre']);
                    $('#apellido').val(datos['apellido']);
                    $('#email').val(datos['email']);
@@ -172,6 +176,36 @@ session_start();
         }
 </script>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#btnActualiza').click(function () {
+            datos = $('#modalActualizar').serialize();
+            console.log(datos);
+
+            $.ajax({
+                type: "POST",
+                data: datos,
+                url: "php/actualizarDatos.php",
+                success: function (r) {
+                    //window.open("http://localhost:63342/Invitations/php/actualizarDatos.php", '_blank');
+                    if (r == 1) {
+                        $('#tabla_inv').load('php/registro.php');
+                        console.log("nose");
+                        // alertify.success("Invitado Actualizado");
+                    } else {
+                        console.log("d");
+                        // alertify.error("Fallo en Actualizar")
+                    }
+                }
+
+
+            });
+        });
+    });
+
+
+</script>
 
 </body>
 </html>

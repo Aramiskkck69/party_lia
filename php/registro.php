@@ -1,19 +1,18 @@
 <?php
+$cell = $_SESSION['usuario_tel'] ;
+require_once 'conexion_bd.php';
 
+$obj = new conectar();
+$conexion = $obj->conexion();
 
-//$cell = $_SERVER["REQUEST_URI"];
-//
-//list($basura, $cell)= explode("?",$cell);
-$conexion = mysqli_connect("localhost", 'root',"","party");
-
-    $cell = $_SESSION['usuario_tel'] ;
-
-$query = mysqli_query($conexion, "SELECT * FROM usuarios WHERE telefono = '$cell'");
+$sql = "SELECT * FROM usuarios WHERE telefono = '$cell'";
+$query = mysqli_query($conexion, $sql);
 
 while($usuario = mysqli_fetch_assoc($query)){ //Convierte en un array la consulta
     $NoInv = (int)$usuario ['NoInv'] ;
     $cell_bd = $usuario ['nombre'] ;
 }
+
 $invitados = "SELECT * FROM invitados WHERE telefono_us = '$cell' ";
 
 $query1 = mysqli_query($conexion, $invitados);
@@ -30,6 +29,9 @@ if(mysqli_num_rows($query1) == $NoInv){?>
     <?php
     while($invitado = mysqli_fetch_assoc($query1)){
         ?> <tr>
+            <td hidden>
+                <?php echo $invitado ['id']; ?>
+            </td>
 
             <td>
                 <?php echo $invitado ['nombre']; ?>
