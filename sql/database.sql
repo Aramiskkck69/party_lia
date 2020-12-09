@@ -22,3 +22,4 @@
     CONSTRAINT fk_registro_usuario FOREIGN KEY(telefono_us) REFERENCES usuarios(telefono)
     )ENGINE=InnoDB;
 
+ INSERT INTO invitados (telefono_us,nombre,apellido,telefono_inv,email) VALUES (3111172104,'Jose Luis Aramis','Ramirez Diaz',31154654,'elkkckdbb@hotmail.com');

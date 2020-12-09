@@ -29,10 +29,12 @@
 //
 // *************** ESTE GRUPO ************************************
         for ($i = 1; $i<= $id;$i++){
-            $datos[$i] =array("nombre$i" => $_POST["nombre$i"],
-                "apellido$i"=> $_POST["apellido$i"],
-                "email$i" => $_POST["email$i"],
-                "numero$i" => $_POST["numero$i"]);
+            $datos[$i] =array(
+                "telefono_us"   => $_POST['telefono_us'],
+                "nombre$i"      => $_POST["nombre$i"],
+                "apellido$i"    => $_POST["apellido$i"],
+                "numero$i"      => $_POST["numero$i"],
+                "email$i"       => $_POST["email$i"]);
 
         }
 
@@ -44,12 +46,19 @@
         //                                                    $datos[$i]["numero$i"].')');
         //    }
     for ($i = 1; $i<= ($id);$i++) {
-        $sql[$i] = array( "consulta$i" =>'INSERT into t_juegos (nombre,apellido,email,numero)
-                                        values ('.$datos[$i]["nombre$i"].','.
-                                                    $datos[$i]["apellido$i"].','.
-                                                    $datos[$i]["email$i"].','.
-                                                    $datos[$i]["numero$i"].')');
+        $array_sql[$i] = array( "consulta$i" =>'INSERT INTO invitados (telefono_us,nombre,apellido,telefono_inv,email)
+                                        values ('. $datos[$i]["telefono_us"].','.
+                                                    "'".$datos[$i]["nombre$i"]."'". ','.
+                                                    "'" .$datos[$i]["apellido$i"]."'".','.
+                                                        $datos[$i]["numero$i"].','.
+                                                    "'".$datos[$i]["email$i"]."'".')');
+
+        $sql=implode($array_sql[$i]);
+        //echo $sql.'<br/>';
+        echo $obj->agregar($sql);
     }
+
+
 
 // *************************************************************************
 
@@ -57,13 +66,13 @@
 
 	//var_dump($datos);
 	//var_dump($data);
-	var_dump($sql);
+//	var_dump($sql);
 
 
 //var_dump($data);
 
 
-//	echo $obj->agregar($datos);
+
 
 
  ?>

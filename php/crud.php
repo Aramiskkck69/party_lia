@@ -1,16 +1,13 @@
 <?php
 
 class crud{
-//    public function agregar($datos){
-//        $obj= new conectar();
-//        $conexion=$obj->conexion();
-//
-//        $sql="INSERT into t_juegos (nombre,anio,empresa)
-//									values ('$datos[0]',
-//											'$datos[1]',
-//											'$datos[2]')";
-//        return mysqli_query($conexion,$sql);
-//    }
+    public function agregar($sql){
+        $obj= new conectar();
+        $conexion=$obj->conexion();
+
+
+        return mysqli_query($conexion,$sql);
+    }
     public function obtenDatos($idInv){
 
         $obj = new conectar();
@@ -20,13 +17,14 @@ class crud{
         $result= mysqli_query($conexion,$sql);
         $ver = mysqli_fetch_row($result);
 
-        $datos = array(
+
+        $datos = [
             'id' =>$ver[0] ,
             'nombre' =>$ver[1],
             'apellido' =>$ver[2],
             'email' =>$ver[3],
             'telefono_inv'=>$ver[4]
-        );
+        ];
 
         return $datos;
     }

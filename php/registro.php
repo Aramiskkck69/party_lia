@@ -1,3 +1,4 @@
+<section id="tabla_general" >
 <?php
 
 require_once 'conexion_bd.php';
@@ -20,7 +21,7 @@ $invitados = "SELECT * FROM invitados WHERE telefono_us = '$cell' ";
 
 $query1 = mysqli_query($conexion, $invitados);
 
-if(mysqli_num_rows($query1) == $NoInv){?>
+if(mysqli_num_rows($query1) >= $NoInv){?>
 
 <table class='table table-dark ' id="tabla_inv">
     <tr >
@@ -110,6 +111,7 @@ if(mysqli_num_rows($query1) == $NoInv){?>
     <tr hidden>
         <td>
             <input name="id" value="<?php echo $NoInv?>" hidden>
+            <input name="telefono_us"  value="<?php echo $cell?>" hidden>
         </td>
     </tr>
         </tbody>
@@ -119,4 +121,5 @@ if(mysqli_num_rows($query1) == $NoInv){?>
 
 </form>
 <?php }?>
+</section>
 

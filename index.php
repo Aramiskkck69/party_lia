@@ -146,10 +146,10 @@ require "php/conexion_bd.php";
         </div>
     </div>
 </div>
-<div id="r">
-<strong> Hola</strong>
-
-</div>
+<!--<div id="r">-->
+<!--<strong> Hola</strong>-->
+<!---->
+<!--</div>-->
 
 
 <script type="text/javascript" src="js/principal/main.js"></script>
@@ -158,16 +158,24 @@ require "php/conexion_bd.php";
 
 <script type="text/javascript">
     function agregarFarmActualizar(idInv){
+
         $.ajax({
             type: "POST",
             data: "idInv=" + idInv,
             url: "php/obtenerDatos.php",
             success:function(r){
-                r=r.substring(1);
+                //r.split('{');
+                //console.log(r);
+                //r=r.substring(2);
                 // console.log(typeof (r));
+                // r=r.substring(1);
                 // console.log(r);
+                while (r.charAt(0) != '{'){
+                    r=r.substring(1);
+                }
+                console.log(r);
                 datos = jQuery.parseJSON(r);
-                console.log(datos);
+
                 $('#id_edit').val(datos['id']);
                 $('#nombre').val(datos['nombre']);
                 $('#apellido').val(datos['apellido']);
@@ -175,6 +183,7 @@ require "php/conexion_bd.php";
                 $('#celular').val(datos['telefono_inv']);
             },
             error:function(eror){
+
             }
         });
     }
@@ -198,7 +207,7 @@ $(document).ready(function () {
                 url: "php/actualizarDatos.php",
                 success: function (r) {
                     alertify.success("agregado con exito :D");
-                    $('#tabla_inv').load('php/registro.php');
+                    $('#AddControll').load('php/registro.php');
                 },error: function() {
                     console.log("Signup was unsuccessful");
                     alertify.error("Fallo al actualizar :(");
@@ -230,13 +239,13 @@ $(document).ready(function () {
             data:datos,
             url:"php/saveDatos.php",
             success:function(r){
-                $('#r').html(r);
-
+                 //$('#r').html(r);
+                //
                 //console.log(r);
                 // if(r==1){
                 //     $('#frmnuevo')[0].reset();
-                //     $('#tablaDatatable').load('tabla.php');
-                //     alertify.success("agregado con exito :D");
+            alertify.success("agregado con exito :D");
+            $('#tabla_general').load('php/registro.php');
                 // }else{
                 //     alertify.error("Fallo al agregar :(");
                 // }
