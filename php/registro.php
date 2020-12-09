@@ -73,9 +73,9 @@ if(mysqli_num_rows($query1) == $NoInv){?>
 
 
 <?php }else{ ?>
-
-<form class="form-control" action="php/saveDatos.php" method="post">
-    <table class='table  ' id="saveDatos" >
+<form  class="saveDatos">
+    <table class='table  ' >
+        <tbody>
        <tr >
        <th scope='col'> No. Invitados </th>
        <th scope='col'> Nombre </th><th scope='col'> Apellido </th>
@@ -85,32 +85,38 @@ if(mysqli_num_rows($query1) == $NoInv){?>
 
 <?php for ($i=1;$i <= $NoInv; $i++){?>
     <tr>
-                <td> <?php echo $i ?>
-                <input name="id" value="<?php echo $i ?>" hidden/>
-                </td>
-                <td>
-                <input type='text' name="nombre" placeholder='Nombre' autofocus />
-                </td>
 
-                <td>
-                <input type='text' name="apellido"    placeholder='Apellido' />
-                </td>
+            <td><?php echo $i ?></td>
 
-                <td>
-                <input  type='email' name="email" placeholder='usuario@email.com' />
-                </td>
+            <td>
+            <input name="nombre<?php echo $i ?>" type='text'  placeholder='Nombre' autofocus />
+            </td>
 
-                <td>
-                <input  type='text' name="numero"   placeholder='(lada) + numero' />
-                </td>
+            <td>
+            <input name="apellido<?php echo $i ?>" type='text'  placeholder='Apellido' />
+            </td>
+
+            <td>
+            <input name="email<?php echo $i ?>" type='email'  placeholder='usuario@email.com' />
+            </td>
+
+            <td>
+            <input name="numero<?php echo $i ?>" type='text'  pattern= '[0-9]{10}'  placeholder='(lada) + numero' />
+            </td>
 
     </tr>
+
     <?php }?>
-</table>
-    <div>
-        <div>
-            <button type="submit"> guardar </button>
-        </div>
-    </div>
+    <tr hidden>
+        <td>
+            <input name="id" value="<?php echo $NoInv?>" hidden>
+        </td>
+    </tr>
+        </tbody>
+    </table>
+
+        <button id="btnAgregarnuevo" type="button"> Guardar </button>
+
 </form>
 <?php }?>
+

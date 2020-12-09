@@ -2,18 +2,15 @@
 
 class crud{
 //    public function agregar($datos){
-//        $obj = new conectar();
-//        $conexion = $obj->conexion();
+//        $obj= new conectar();
+//        $conexion=$obj->conexion();
 //
-//        $sql = "INSERT INTO invitados (id,nombre,apellido,email,telefono_inv) values
-//                ('$datos[0]',
-//                '$datos[1]',
-//                '$datos[2]',
-//                '$datos[3]',
-//                '$datos[4]')";
-//
-//    return mysqli_query($conexion,$sql);
-//}
+//        $sql="INSERT into t_juegos (nombre,anio,empresa)
+//									values ('$datos[0]',
+//											'$datos[1]',
+//											'$datos[2]')";
+//        return mysqli_query($conexion,$sql);
+//    }
     public function obtenDatos($idInv){
 
         $obj = new conectar();

@@ -146,8 +146,8 @@ require "php/conexion_bd.php";
         </div>
     </div>
 </div>
-<!--<div id="r">-->
-<!--<strong> Hola</strong>-->
+<div id="r">
+<strong> Hola</strong>
 
 </div>
 
@@ -157,35 +157,35 @@ require "php/conexion_bd.php";
 
 
 <script type="text/javascript">
-        function agregarFarmActualizar(idInv){
+    function agregarFarmActualizar(idInv){
+        $.ajax({
+            type: "POST",
+            data: "idInv=" + idInv,
+            url: "php/obtenerDatos.php",
+            success:function(r){
+                r=r.substring(1);
+                // console.log(typeof (r));
+                // console.log(r);
+                datos = jQuery.parseJSON(r);
+                console.log(datos);
+                $('#id_edit').val(datos['id']);
+                $('#nombre').val(datos['nombre']);
+                $('#apellido').val(datos['apellido']);
+                $('#email').val(datos['email']);
+                $('#celular').val(datos['telefono_inv']);
+            },
+            error:function(eror){
+            }
+        });
+    }
 
-            //console.log(idInv);
-            $.ajax({
-               type: "POST",
-               data: "idInv=" + idInv,
-                url: "php/obtenerDatos.php",
-                success:function(r){
-                    r=r.substring(1);
-                    // console.log(typeof (r));
-                    // console.log(r);
-                    datos = jQuery.parseJSON(r);
-                    console.log(datos);
-                   $('#id_edit').val(datos['id']);
-                   $('#nombre').val(datos['nombre']);
-                   $('#apellido').val(datos['apellido']);
-                   $('#email').val(datos['email']);
-                   $('#celular').val(datos['telefono_inv']);
-                },
-                error:function(eror){
-                   //console.log(eror);
-                }
-            });
 
-        }
+
+
 </script>
 
 <script type="text/javascript">
-    $(document).ready(function () {
+$(document).ready(function () {
 
         $('#btnActualiza').click(function (e) {
             e.preventDefault();
@@ -197,19 +197,87 @@ require "php/conexion_bd.php";
                 data: datos,
                 url: "php/actualizarDatos.php",
                 success: function (r) {
-                   console.log(r);
+                    alertify.success("agregado con exito :D");
                     $('#tabla_inv').load('php/registro.php');
                 },error: function() {
                     console.log("Signup was unsuccessful");
+                    alertify.error("Fallo al actualizar :(");
                 }
 
 
             });
         });
+
+
+    // $('#btnAgregarnuevo').click(function(e) {
+    //     e.preventDefault();
+    //     var rowvalue = [];
+    //     $("tbody > tr ").each(function (i, v) {
+    //         rowvalue[i] = $('td', this).map(function () {
+    //             return $(this).text()
+    //         }).get()
+    //     });
+    //     console.log(rowvalue);
+    // });
+
+    $('#btnAgregarnuevo').click(function(e){
+        e.preventDefault();
+        datos = $(".saveDatos").serialize();
+
+        console.log(datos);
+        $.ajax({
+            type:"POST",
+            data:datos,
+            url:"php/saveDatos.php",
+            success:function(r){
+                $('#r').html(r);
+
+                //console.log(r);
+                // if(r==1){
+                //     $('#frmnuevo')[0].reset();
+                //     $('#tablaDatatable').load('tabla.php');
+                //     alertify.success("agregado con exito :D");
+                // }else{
+                //     alertify.error("Fallo al agregar :(");
+                // }
+            },
+            error:function (error){
+                console.log("Este es el error"+ error)
+            }
+        });
     });
 
+    // $('#tabla_datos').on('click', '.enviar', function(e) {
+    //
+    //     e.preventDefault(); // cancela el evento por defecto ***MUY IMPORTANTE PARA EL FUNCIONAMIENTO**
+    //
+    //     var filaactual = $(this).closest("tr"); // obtiene la fila actual
+    //
+    //     var cita = filaactual.find("td:eq(0)").text(); // obtiene el valor del primer TD de la fila actual
+    //
+    //     var atendido = $("#atendido").val();
+    //
+    //
+    //     var parametros = {
+    //         cita: cita,
+    //         atendido: atendido
+    //     };
+    //
+    //     $.ajax({
+    //         type:  'POST', //método de envio
+    //         data:  parametros, //datos que se envian a traves de ajax
+    //         url:   'modelo_tabla.php', //archivo que recibe la peticion
+    //         success:  function (response) {
+    //             location.href='citas.php';
+    //         }
+    //     });
+    // });
 
+
+});
 </script>
+
+
 
 </body>
 </html>
