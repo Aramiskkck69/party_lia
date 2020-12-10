@@ -146,10 +146,10 @@ require "php/conexion_bd.php";
         </div>
     </div>
 </div>
-<!--<div id="r">-->
-<!--<strong> Hola</strong>-->
-<!---->
-<!--</div>-->
+<div id="r">
+<strong> Hola</strong>
+
+</div>
 
 
 <script type="text/javascript" src="js/principal/main.js"></script>
@@ -175,7 +175,6 @@ require "php/conexion_bd.php";
                 }
                 console.log(r);
                 datos = jQuery.parseJSON(r);
-
                 $('#id_edit').val(datos['id']);
                 $('#nombre').val(datos['nombre']);
                 $('#apellido').val(datos['apellido']);
@@ -239,7 +238,7 @@ $(document).ready(function () {
             data:datos,
             url:"php/saveDatos.php",
             success:function(r){
-                 //$('#r').html(r);
+                 // $('#r').html(r);
                 //
                 //console.log(r);
                 // if(r==1){

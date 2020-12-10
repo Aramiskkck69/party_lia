@@ -46,6 +46,9 @@
         //                                                    $datos[$i]["numero$i"].')');
         //    }
     for ($i = 1; $i<= ($id);$i++) {
+        if ($datos[$i]["nombre$i"] == "" ||$datos[$i]["apellido$i"] == "" || $datos[$i]["numero$i"] == ""){
+            continue;
+        }
         $array_sql[$i] = array( "consulta$i" =>'INSERT INTO invitados (telefono_us,nombre,apellido,telefono_inv,email)
                                         values ('. $datos[$i]["telefono_us"].','.
                                                     "'".$datos[$i]["nombre$i"]."'". ','.
@@ -54,7 +57,7 @@
                                                     "'".$datos[$i]["email$i"]."'".')');
 
         $sql=implode($array_sql[$i]);
-        //echo $sql.'<br/>';
+        echo $sql.'<br/>';
         echo $obj->agregar($sql);
     }
 
