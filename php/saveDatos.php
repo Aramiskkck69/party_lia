@@ -57,7 +57,7 @@
                                                     "'".$datos[$i]["email$i"]."'".')');
 
         $sql=implode($array_sql[$i]);
-        echo $sql.'<br/>';
+        //echo $sql.'<br/>';
         echo $obj->agregar($sql);
     }
 

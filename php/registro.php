@@ -2,7 +2,7 @@
 <?php
 
 require_once 'conexion_bd.php';
-session_start();
+//session_start();
 $cell = $_SESSION['usuario_tel'] ;
 
 
@@ -21,9 +21,9 @@ $invitados = "SELECT * FROM invitados WHERE telefono_us = '$cell' ";
 
 $query1 = mysqli_query($conexion, $invitados);
 
-if(mysqli_num_rows($query1) >= $NoInv){?>
-
-<table class='table table-dark ' id="tabla_inv">
+if(  mysqli_num_rows($query1) != 0 && mysqli_num_rows($query1) <= $NoInv){?>
+<div class="table-responsive-lg table-responsive-md table-responsive-sm">
+<table class='table' id="tabla_inv" >
     <tr >
         <th scope='col'> Nombre </th><th scope='col'> Apellido </th>
         <th scope='col'> Email </th>
@@ -72,9 +72,13 @@ if(mysqli_num_rows($query1) >= $NoInv){?>
 <?php   } ?>
  </table>
 
+</div>
+
 <?php }else{ ?>
 <form  class="saveDatos">
-    <table class='table  ' >
+    <h3>Por favor registra los invitados que asistiran al evento </h3>
+<div class="table-responsive-lg table-responsive-md table-responsive-sm">
+<table class='table' id="tabla_registro">
         <tbody>
        <tr >
        <th scope='col'> No. Invitados </th>
@@ -89,11 +93,11 @@ if(mysqli_num_rows($query1) >= $NoInv){?>
             <td><?php echo $i ?></td>
 
             <td>
-            <input name="nombre<?php echo $i ?>" type='text'  placeholder='Nombre' autofocus />
+            <input name="nombre<?php echo $i ?>" type='text'  placeholder='Nombre del invitado' autofocus />
             </td>
 
             <td>
-            <input name="apellido<?php echo $i ?>" type='text'  placeholder='Apellido' />
+            <input name="apellido<?php echo $i ?>" type='text'  placeholder='Apellido del invitado' />
             </td>
 
             <td>
@@ -120,5 +124,6 @@ if(mysqli_num_rows($query1) >= $NoInv){?>
 
 </form>
 <?php }?>
+</div>
 </section>
 
